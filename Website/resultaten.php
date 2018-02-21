@@ -1,5 +1,5 @@
 <?php
-$pageTitle = "Resultaat";
+$pageTitle = "Resultaten";
 include "assets/core/head.php";
 ?>
 
