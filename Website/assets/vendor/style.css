@@ -1,3 +1,83 @@
+@font-face {
+  font-family: "RO Sans";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/RO-SansWebText-Regular.eot") format("embedded-opentype"), url("../fonts/RO-SansWebText-Regular.woff") format("opentype"), url("../fonts/RO-SansWebText-Regular.ttf") format("truetype")
+}
+@font-face {
+  font-family: "RO Sans";
+  font-style: italic;
+  font-weight: normal;
+  src: url("../fonts/RO-SansWebText-Italic.eot") format("embedded-opentype"), url("../fonts/RO-SansWebText-Italic.woff") format("opentype"), url("../fonts/RO-SansWebText-Italic.ttf") format("truetype")
+}
+@font-face {
+  font-family: "RO Sans";
+  font-style: normal;
+  font-weight: bold;
+  src: url("../fonts/RO-SansWebText-Bold.eot") format("embedded-opentype"), url("../fonts/RO-SansWebText-Bold.woff") format("opentype"), url("../fonts/RO-SansWebText-Bold.ttf") format("truetype")
+}
+
+@font-face {
+  font-family: "RO Icons";
+  font-style: normal;
+  font-weight: bold;
+  src: url("../fonts/ro-icons-1.5.eot") format("embedded-opentype"), url("../fonts/ro-icons-1.5.woff") format("opentype"), url("../fonts/ro-icons-1.5.ttf") format("truetype")
+}
+
 body {
   margin: 0;
+  font-family: "RO Sans",Calibri,sans-serif;
+}
+
+.navbar-logo {
+  margin-left: 48%;
+}
+
+nav {
+  background-color: #01689b;
+  height: 70px;
+  color: white;
+  font-size: 28px;
+}
+
+nav a {
+  display: inline-block;
+}
+
+.navbar-item {
+  margin-top: 13px;
+  padding: 4px;
+  color: white;
+  text-decoration: none;
+}
+
+.navbar-right:hover {
+  text-decoration: underline;
+}
+
+.navbar-left {
+  float: left;
+}
+
+.navbar-right {
+  float: right;
+  margin-top: 16px;
+  font-size: 22px;
+}
+
+.navbar-next {
+  font-weight: normal;
+  font-family: "RO Icons";
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+.navbar-split {
+  width: 10%;
+  height: 1px;
+}
+
+.navbar-small-split {
+  width: 20px;
+  height: 1px;
 }
