@@ -1,5 +1,5 @@
 <?php
-$pageTitle = "Stem";
+$pageTitle = "Stemmen";
 include "assets/core/head.php";
 ?>
 
