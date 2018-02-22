@@ -1,5 +1,5 @@
 <?php
-$pageTitle = "Sitemap";
+$pageTitle = "Contact";
 include "assets/core/head.php";
 ?>
 

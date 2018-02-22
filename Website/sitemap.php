@@ -1,5 +1,5 @@
 <?php
-$pageTitle = "Stemmen";
+$pageTitle = "Sitemap";
 include "assets/core/head.php";
 ?>
 
