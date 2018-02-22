@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="/assets/vendor/fontawesome-5.0.6/css/fontawesome-all.min.css">
   </head>
   <body>
+
 <!-- Navbar -->
 <?php
 include "head/nav.php";
