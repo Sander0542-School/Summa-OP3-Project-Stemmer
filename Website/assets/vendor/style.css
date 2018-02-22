@@ -4,17 +4,33 @@
   font-weight: normal;
   src: url("../fonts/RO-SansWebText-Regular.eot") format("embedded-opentype"), url("../fonts/RO-SansWebText-Regular.woff") format("opentype"), url("../fonts/RO-SansWebText-Regular.ttf") format("truetype")
 }
+
 @font-face {
   font-family: "RO Sans";
   font-style: italic;
   font-weight: normal;
   src: url("../fonts/RO-SansWebText-Italic.eot") format("embedded-opentype"), url("../fonts/RO-SansWebText-Italic.woff") format("opentype"), url("../fonts/RO-SansWebText-Italic.ttf") format("truetype")
 }
+
 @font-face {
   font-family: "RO Sans";
   font-style: normal;
   font-weight: bold;
   src: url("../fonts/RO-SansWebText-Bold.eot") format("embedded-opentype"), url("../fonts/RO-SansWebText-Bold.woff") format("opentype"), url("../fonts/RO-SansWebText-Bold.ttf") format("truetype")
+}
+
+@font-face {
+    font-family: "RO Serif";
+    font-style: normal;
+    font-weight: normal;
+    src: url("../fonts/RO-SerifWeb-Regular.eot?") format("embedded-opentype"), url("../fonts/RO-SerifWeb-Regular.woff") format("opentype"), url("../fonts/RO-SerifWeb-Regular.ttf") format("truetype")
+}
+
+@font-face {
+    font-family: "RO Serif";
+    font-style: italic;
+    font-weight: normal;
+    src: url("../fonts/RO-SerifWeb-Italic.eot?") format("embedded-opentype"), url("../fonts/RO-SerifWeb-Italic.woff") format("opentype"), url("../fonts/RO-SerifWeb-Italic.ttf") format("truetype")
 }
 
 @font-face {
@@ -28,6 +44,8 @@ body {
   margin: 0;
   font-family: "RO Sans",Calibri,sans-serif;
 }
+
+/* Navbar */
 
 .navbar-logo {
   margin-left: 48%;
@@ -80,4 +98,71 @@ nav a {
 .navbar-small-split {
   width: 20px;
   height: 1px;
+}
+
+/* Footer */
+
+.footer {
+  background-color: #01689b;
+  width: 100%;
+  margin-top: 10%;
+  color: white;
+}
+
+.footer-content {
+  padding: 20px 10% 20px 10%;
+  width: 80%;
+  display: inline-block;
+}
+
+.footer-title {
+  font-family: "RO Serif";
+  font-style: italic;
+  font-weight: normal;
+  line-height: 1.2381;
+  font-size: 1.75em;
+}
+
+.content-left {
+  float: left;
+  width: 60%;
+}
+
+.content-right {
+  float: left;
+  width: 40%;
+  display: inline-block;
+}
+
+.content-row {
+  float: left;
+  width: 50%;
+}
+
+.content-row h2 {
+  font-size: 1.5em;
+  margin-bottom: 5px;
+  font-weight: normal;
+}
+
+.content-row ul {
+  list-style: none;
+  padding: 0;
+}
+
+.content-row li {
+  width: 100%;
+  list-style: none;
+  margin-bottom: 4px;
+}
+
+.content-row a {
+  display: block;
+  text-decoration: none;
+  color: white;
+  font-size: 112.5%;
+}
+
+.content-row a:hover {
+  text-decoration: underline;
 }
