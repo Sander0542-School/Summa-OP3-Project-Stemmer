@@ -1,29 +1,21 @@
-<img src="/assets/images/logo.png" class="navbar-logo" alt="Online Stemmen Logo">
 
-<?php if (strpos($_SERVER["REQUEST_URI"], "stemmen")) {
+    <img src="/assets/images/logo.png" class="navbar-logo" alt="Online Stemmen Logo">
+<?php if ($pageTitle != "Home") {
   echo '
-		<nav>
-			<div class="navbar-split navbar-left"></div>
-			<a href="/" class="navbar-item navbar-left">Home</a>
-			<p class="navbar-item navbar-left navbar-next"></p>
-			<b class="navbar-item navbar-left"> Stemmen</b>
+    <nav>
+      <div class="navbar-split navbar-left"></div>
+      <a href="/" class="navbar-item navbar-left">Home</a>
+      <p class="navbar-item navbar-left navbar-next"></p>
+      <b class="navbar-item navbar-left"> '.$pageTitle.'</b>
     </nav>';
-} elseif (strpos($_SERVER["REQUEST_URI"], "resultaten")) {
-  echo '
-		<nav>
-			<div class="navbar-split navbar-left"></div>
-			<a href="/" class="navbar-item navbar-left">Home</a>
-			<p class="navbar-item navbar-left navbar-next"></p>
-			<b class="navbar-item navbar-left"> Resultaten</b>
-		</nav>';
 } else {
   echo '
-		<nav>
-			<div class="navbar-split navbar-left"></div>
-			<a href="/" class="navbar-item navbar-left">Home</a>
-			<div class="navbar-split navbar-right"></div>
-			<a href="/resultaten" class="navbar-item navbar-right">Resultaten</a>
-			<div class="navbar-small-split navbar-right"></div>
-			<a href="/stemmen" class="navbar-item navbar-right">Stemmen</a>
-		</nav>';
+    <nav>
+      <div class="navbar-split navbar-left"></div>
+      <a href="/" class="navbar-item navbar-left">Home</a>
+      <div class="navbar-split navbar-right"></div>
+      <a href="/resultaten" class="navbar-item navbar-right">Resultaten</a>
+      <div class="navbar-small-split navbar-right"></div>
+      <a href="/stemmen" class="navbar-item navbar-right">Stemmen</a>
+    </nav>';
 }
