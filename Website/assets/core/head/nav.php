@@ -22,8 +22,8 @@
 			<div class="navbar-split navbar-left"></div>
 			<a href="/" class="navbar-item navbar-left">Home</a>
 			<div class="navbar-split navbar-right"></div>
-			<a href="/stemmen" class="navbar-item navbar-right">Stemmen</a>
-			<div class="navbar-small-split navbar-right"></div>
 			<a href="/resultaten" class="navbar-item navbar-right">Resultaten</a>
+			<div class="navbar-small-split navbar-right"></div>
+			<a href="/stemmen" class="navbar-item navbar-right">Stemmen</a>
 		</nav>';
 }
