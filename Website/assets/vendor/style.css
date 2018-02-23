@@ -157,7 +157,6 @@ nav a {
 }
 
 .content-row a {
-  display: block;
   text-decoration: none;
   color: white;
   font-size: 112.5%;
@@ -165,4 +164,17 @@ nav a {
 
 .content-row a:hover {
   text-decoration: underline;
+}
+
+/* Meldingsboxen */
+
+.messagebox {
+  margin: 10% 0 10% 0;
+  background-color: #01689b;
+}
+
+.messagebox h2 {
+  padding: 20px;
+  text-align: center;
+  color: white;
 }
