@@ -1,3 +1,8 @@
+<?php
+session_start();
+include "classes/core.php";
+$CORE = new CORE();
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
