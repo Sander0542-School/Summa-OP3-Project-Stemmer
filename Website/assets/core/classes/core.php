@@ -33,7 +33,7 @@ class CORE
 			if ($stmt->rowCount() == 1) {
 				return true;
 			} else {
-				$this->logout();
+				$this->loguit();
 				return false;
 			}
 		} else {
