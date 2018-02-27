@@ -20,17 +20,17 @@
 }
 
 @font-face {
-    font-family: "RO Serif";
-    font-style: normal;
-    font-weight: normal;
-    src: url("../fonts/RO-SerifWeb-Regular.eot?") format("embedded-opentype"), url("../fonts/RO-SerifWeb-Regular.woff") format("opentype"), url("../fonts/RO-SerifWeb-Regular.ttf") format("truetype")
+  font-family: "RO Serif";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/RO-SerifWeb-Regular.eot?") format("embedded-opentype"), url("../fonts/RO-SerifWeb-Regular.woff") format("opentype"), url("../fonts/RO-SerifWeb-Regular.ttf") format("truetype")
 }
 
 @font-face {
-    font-family: "RO Serif";
-    font-style: italic;
-    font-weight: normal;
-    src: url("../fonts/RO-SerifWeb-Italic.eot?") format("embedded-opentype"), url("../fonts/RO-SerifWeb-Italic.woff") format("opentype"), url("../fonts/RO-SerifWeb-Italic.ttf") format("truetype")
+  font-family: "RO Serif";
+  font-style: italic;
+  font-weight: normal;
+  src: url("../fonts/RO-SerifWeb-Italic.eot?") format("embedded-opentype"), url("../fonts/RO-SerifWeb-Italic.woff") format("opentype"), url("../fonts/RO-SerifWeb-Italic.ttf") format("truetype")
 }
 
 @font-face {
@@ -42,7 +42,7 @@
 
 body {
   margin: 0;
-  font-family: "RO Sans",Calibri,sans-serif;
+  font-family: "RO Sans", Calibri, sans-serif;
 }
 
 /* Navbar */
@@ -179,3 +179,29 @@ nav a {
   text-align: center;
   color: white;
 }
+
+/* Inlog  */
+
+input[type=text] {
+  border-radius: 4px;
+  padding: 12px;
+  width: 25%;
+  margin-top: 21px;
+  outline: 0;
+}
+
+input[type=submit] {
+  background-color: #01689b;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 21px;
+  width: 27%;
+}
+
+.form {
+  text-align: center;
+}
+
