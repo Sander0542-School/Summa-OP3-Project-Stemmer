@@ -2,7 +2,7 @@
 $pageTitle = "Stemmen";
 include "assets/core/head.php";
 ?>
-
+<div class="form">
 <?php
 if (isset($_POST["loginBsn"]) && isset($_POST["loginCode"])) {
   if ($CORE->login($_POST["loginBsn"], $_POST["loginCode"])) {
@@ -18,14 +18,14 @@ if ($CORE->isIngelogd()) {
 } else {
   echo '
     <form action="/stemmen" method="post">
-      <input type="text" placeholder="bsn" name="loginBsn">
-      <input type="text" placeholder="code" name="loginCode">
-      <input type="submit" value="login">
+      <input type="text" placeholder="bsn" name="loginBsn"><br>
+      <input type="text" placeholder="code" name="loginCode"><br>
+      <input type="submit" value="Login">
     </form>
 ';
 }
 ?>
-
+</div>
 <?php
 include "assets/core/foot.php";
 ?>
