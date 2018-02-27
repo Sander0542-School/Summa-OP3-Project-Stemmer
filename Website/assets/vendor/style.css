@@ -105,7 +105,7 @@ nav a {
 .footer {
   background-color: #01689b;
   width: 100%;
-  margin-top: 10%;
+  margin-top: 50px;
   color: white;
 }
 
@@ -203,5 +203,16 @@ input[type=submit] {
 
 .form {
   text-align: center;
+}
+
+/* Resultaten */
+
+select{
+  border-radius: 4px;
+  padding: 12px 20px;
+  border: 2px solid darkgray;
+  margin-top: 40px;
+  margin-left: 40px;
+  outline: 0;
 }
 
