@@ -101,6 +101,39 @@ class CORE
 		}
 	}
 
+	public function krijgPartijenVanGemeenteId($gemeenteId) {
+		$stmt = $this->conn->prepare("SELECT * FROM partijen WHERE gemeente = :gemeenteId");
+		$stmt->execute(array(":gemeenteId"=>$gemeenteId));
+		$PS = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		if ($stmt->rowCount() == 0) {
+			return false;
+		} else {
+			return $PS;
+		}
+	}
+
+	public function krijgStemresulatenVanGemeenteId($gemeenteId) {
+		$stmt = $this->conn->prepare("SELECT COUNT(stemmen.uID) as stemmen, partijen.naam as partijNaam FROM stemmen INNER JOIN partijen ON stemmen.partij = partijen.id INNER JOIN gebruikers ON stemmen.uID = gebruikers.id INNER JOIN gemeenten ON gebruikers.gemeente = gemeenten.id WHERE gemeenten.id = :gemeenteId GROUP BY stemmen.partij");
+		$stmt->execute(array(":gemeenteId"=>$gemeenteId));
+		$PS = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		if ($stmt->rowCount() == 0) {
+			return false;
+		} else {
+			return $PS;
+		}
+	}
+
+	public function krijgGemeenten() {
+		$stmt = $this->conn->prepare("SELECT * FROM gemeenten");
+		$stmt->execute();
+		$PS = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		if ($stmt->rowCount() == 0) {
+			return false;
+		} else {
+			return $PS;
+		}
+	}
+
 	public function partijIdNaarNaam($id) {
 		$stmt = $this->conn->prepare("SELECT name FROM partijen WHERE id=:id");
 		$stmt->execute(array(":id"=>$id));
