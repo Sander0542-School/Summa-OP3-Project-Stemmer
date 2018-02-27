@@ -7,6 +7,7 @@ include "assets/core/head.php";
 if (isset($_POST["loginBsn"]) && isset($_POST["loginCode"])) {
   if ($CORE->login($_POST["loginBsn"], $_POST["loginCode"])) {
     echo '<div class="messagebox green"><h2>U bent succesvol ingelogd</h2></div>';
+    $CORE->redirect("/stemmen");
   } else {
     echo '<div class="messagebox red"><h2>U kunt niet inloggen met deze BSN en Code</h2></div>';
   }

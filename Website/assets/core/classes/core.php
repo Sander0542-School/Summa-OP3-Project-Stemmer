@@ -70,7 +70,7 @@ class CORE
 
 	public function heeftGestemt($gebruikerID, $partijId)
 	{
-		$stmt = $this->conn->prepare("SELECT id FROM stemmen WHERE uID=:gebruikerID AND partij=:partijId;");
+		$stmt = $this->conn->prepare("SELECT uID FROM stemmen WHERE uID=:gebruikerID AND partij=:partijId;");
 		$stmt->bindparam(":gebruikerID",$gebruikerID);
 		$stmt->bindparam(":partijId",$partijId);
 		$stmt->execute();
