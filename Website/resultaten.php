@@ -8,7 +8,7 @@ include "assets/core/head.php";
 $gemeenten = $CORE->krijgGemeenten();
 if ($gemeenten) {
 	echo '
-			<option value="0" disable>Selecteer een gemeente</option>';
+			<option value="0"'; if (!isset($_GET["gemeente"])) { echo ' selected'; } echo ' disabled>Selecteer een gemeente</option>';
 	foreach ($gemeenten as $gemeente) {
 		echo '
 			<option value="'.$gemeente["id"].'"'; if (isset($_GET["gemeente"]) && $_GET["gemeente"] == $gemeente["id"]) { echo ' selected'; } echo '>'.$gemeente["naam"].'</option>';
