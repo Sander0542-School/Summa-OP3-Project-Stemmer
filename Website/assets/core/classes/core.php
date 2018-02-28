@@ -123,7 +123,7 @@ class CORE
 	}
 
 	public function krijgStemresulatenVanGemeenteId($gemeenteId) {
-		$stmt = $this->conn->prepare("SELECT COUNT(stemmen.uID) as stemmen, partijen.naam as partijNaam, partijen.afkorting as partijAfkorting FROM stemmen INNER JOIN partijen ON stemmen.partij = partijen.id INNER JOIN gebruikers ON stemmen.uID = gebruikers.id INNER JOIN gemeenten ON gebruikers.gemeente = gemeenten.id WHERE gemeenten.id = :gemeenteId GROUP BY stemmen.partij");
+		$stmt = $this->conn->prepare("SELECT COUNT(stemmen.uID) as stemmen, partijen.naam as partijNaam, partijen.afkorting as partijAfkorting FROM stemmen INNER JOIN partijen ON stemmen.partij = partijen.id INNER JOIN gebruikers ON stemmen.uID = gebruikers.id INNER JOIN gemeenten ON gebruikers.gemeente = gemeenten.id WHERE gemeenten.id = :gemeenteId AND partijen.gemeente = :gemeenteId GROUP BY stemmen.partij");
 		$stmt->execute(array(":gemeenteId"=>$gemeenteId));
 		$PS = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		if ($stmt->rowCount() == 0) {
