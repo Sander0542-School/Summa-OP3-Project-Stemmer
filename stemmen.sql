@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 27 feb 2018 om 11:48
+-- Gegenereerd op: 28 feb 2018 om 12:11
 -- Serverversie: 10.1.26-MariaDB
 -- PHP-versie: 7.1.8
 
@@ -56,7 +56,7 @@ CREATE TABLE `gebruikers` (
   `id` int(11) NOT NULL,
   `bsn` int(11) NOT NULL,
   `voornaam` varchar(100) NOT NULL,
-  `tussenvoegsels` varchar(50) NOT NULL,
+  `tussenvoegsels` varchar(50) DEFAULT NULL,
   `achternaam` varchar(100) NOT NULL,
   `gemeente` int(11) DEFAULT NULL,
   `woonplaats` varchar(75) NOT NULL,
@@ -71,8 +71,11 @@ CREATE TABLE `gebruikers` (
 --
 
 INSERT INTO `gebruikers` (`id`, `bsn`, `voornaam`, `tussenvoegsels`, `achternaam`, `gemeente`, `woonplaats`, `postcode`, `straat`, `huisnummer`, `huisnummerToevoeging`) VALUES
-(1, 123456, 'Sander', '', 'Jochems', 108, 'Geldrop', '5664 EX', 'Hout Oost', 9, ''),
-(2, 234567, 'Bram', '', 'Swinkels', 299, 'Someren', '5711 AN', 'Beatrixlaan', 18, '');
+(1, 123456, 'Sander', NULL, 'Jochems', 108, 'Geldrop', '5664 EX', 'Hout Oost', 9, ''),
+(2, 234567, 'Bram', NULL, 'Swinkels', 299, 'Someren', '5711 AN', 'Beatrixlaan', 18, ''),
+(3, 345678, 'Jovi', NULL, 'Simons', 277, 'Vlodrop', '6063 NE', 'Klifsbergweg', 16, ''),
+(4, 456789, 'Dirk', NULL, 'Lemmen', 299, 'Someren', '5712 HD', 'Van Gijselstraat', 9, ''),
+(5, 567890, 'Luc', 'van den', 'Borne', 352, 'Stramproy', '6039 GR', 'Bokkenstraat', 17, '');
 
 -- --------------------------------------------------------
 
@@ -491,14 +494,14 @@ CREATE TABLE `partijen` (
   `id` int(11) NOT NULL,
   `naam` varchar(100) NOT NULL,
   `afkorting` varchar(10) NOT NULL,
-  `gemeenten` int(11) NOT NULL
+  `gemeente` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `partijen`
 --
 
-INSERT INTO `partijen` (`id`, `naam`, `afkorting`, `gemeenten`) VALUES
+INSERT INTO `partijen` (`id`, `naam`, `afkorting`, `gemeente`) VALUES
 (2, 'Partij van de Arbeid', 'PvdA', 108),
 (3, 'Partij voor de Vrijheid', 'PVV', 299),
 (4, 'Christen-Democratisch Appèl', 'CDA', 299),
@@ -520,6 +523,15 @@ CREATE TABLE `stemmen` (
   `uID` int(11) NOT NULL,
   `partij` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `stemmen`
+--
+
+INSERT INTO `stemmen` (`uID`, `partij`) VALUES
+(1, 2),
+(2, 4),
+(4, 8);
 
 --
 -- Indexen voor geëxporteerde tabellen
@@ -551,7 +563,7 @@ ALTER TABLE `gemeenten`
 --
 ALTER TABLE `partijen`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `foreign_partijen_gemeenten` (`gemeenten`);
+  ADD KEY `foreign_partijen_gemeenten` (`gemeente`);
 
 --
 -- Indexen voor tabel `stemmen`
@@ -573,7 +585,7 @@ ALTER TABLE `codes`
 -- AUTO_INCREMENT voor een tabel `gebruikers`
 --
 ALTER TABLE `gebruikers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT voor een tabel `gemeenten`
 --
@@ -604,7 +616,7 @@ ALTER TABLE `gebruikers`
 -- Beperkingen voor tabel `partijen`
 --
 ALTER TABLE `partijen`
-  ADD CONSTRAINT `foreign_partijen_gemeenten` FOREIGN KEY (`gemeenten`) REFERENCES `gemeenten` (`id`);
+  ADD CONSTRAINT `foreign_partijen_gemeenten` FOREIGN KEY (`gemeente`) REFERENCES `gemeenten` (`id`);
 
 --
 -- Beperkingen voor tabel `stemmen`
