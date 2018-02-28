@@ -2,27 +2,29 @@
 $pageTitle = "Resultaten";
 include "assets/core/head.php";
 ?>
-
-	<select>
+	<form>
+		<select name="gemeente" onchange="this.form.submit()">
 <?php
 $gemeenten = $CORE->krijgGemeenten();
 if ($gemeenten) {
 	echo '
-		<option value="0" disable>Selecteer een gemeente</option>';
+			<option value="0" disable>Selecteer een gemeente</option>';
 	foreach ($gemeenten as $gemeente) {
 		echo '
-		<option value="'.$gemeente["id"].'"'; if (isset($_GET["gemeente"]) && $_GET["gemeente"] == $gemeente["id"]) { echo ' selected'; } echo '>'.$gemeente["naam"].'</option>';
+			<option value="'.$gemeente["id"].'"'; if (isset($_GET["gemeente"]) && $_GET["gemeente"] == $gemeente["id"]) { echo ' selected'; } echo '>'.$gemeente["naam"].'</option>';
 	}
 }
-?>
-	</select>
+	?>
+		</select>
+	</form>
 
 <?php
 
-$stemResultaten = $CORE->krijgStemresulatenVanGemeenteId($_GET["gemeente"]);
+if (isset($_GET["gemeente"])) {
+	$stemResultaten = $CORE->krijgStemresulatenVanGemeenteId($_GET["gemeente"]);
 
-if ($stemResultaten) {
-	echo '	
+	if ($stemResultaten) {
+		echo '	
 	<script type="text/javascript">
 		google.charts.load(\'current\', {
 			\'packages\': [\'corechart\']
@@ -34,12 +36,12 @@ if ($stemResultaten) {
 			var data = google.visualization.arrayToDataTable([
 				[\'Stemmen\', \'Stemmen per gemeente\']'; 
 	
-	foreach ($stemResultaten as $resultaat) {
-		echo ',
+		foreach ($stemResultaten as $resultaat) {
+			echo ',
 				[\''.$resultaat["partijNaam"].'\', '.$resultaat["stemmen"].']';
-	}
-	
-	echo '
+		}
+		
+		echo '
 			]);
 
 			var options = {
@@ -53,6 +55,7 @@ if ($stemResultaten) {
 	</script>
 
 	<div id="piechart" style="width: 900px; height: 500px;"></div>';
+	}
 }
 ?>
 
