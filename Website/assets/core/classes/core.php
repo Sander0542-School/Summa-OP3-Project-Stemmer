@@ -68,11 +68,21 @@ class CORE
 		}
 	}
 
-	public function heeftGestemt($gebruikerID, $partijId)
+	public function krijgGebruikerInformatie() {
+		$stmt = $this->conn->prepare("SELECT IF(ISNULL(tussenvoegsels),CONCAT(voornaam,' ',achternaam),CONCAT(voornaam,' ',tussenvoegsels,' ',achternaam)) as naam, gemeenten.naam as gemeente FROM gebruikers INNER JOIN gemeenten ON gebruikers.gemeente = gemeenten.id");
+		$stmt->execute();
+		$PS = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		if ($stmt->rowCount() == 0) {
+			return false;
+		} else {
+			return $PS;
+		}
+	}
+
+	public function heeftGestemt($gebruikerID)
 	{
-		$stmt = $this->conn->prepare("SELECT uID FROM stemmen WHERE uID=:gebruikerID AND partij=:partijId;");
-		$stmt->bindparam(":gebruikerID",$gebruikerID);
-		$stmt->bindparam(":partijId",$partijId);
+		$stmt = $this->conn->prepare("SELECT uID FROM stemmen WHERE uID=:gebruikerID;");
+		$stmt->execute(array(":gebruikerID"=>$gebruikerID));
 		$stmt->execute();
 		$PS = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		if ($stmt->rowCount() == 0) {

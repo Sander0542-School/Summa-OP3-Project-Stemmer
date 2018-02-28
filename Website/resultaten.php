@@ -3,54 +3,59 @@ $pageTitle = "Resultaten";
 include "assets/core/head.php";
 ?>
 
-    <select>
-        <?php
-            $gemeenten = $CORE->krijgGemeenten();
-            if ($gemeenten) {
-                echo '
-        <option value="0" disable>Selecteer een gemeente</option>';
-                foreach ($gemeenten as $gemeente) {
-                    echo '
-        <option value="'.$gemeente["id"].'">'.$gemeente["naam"].'</option>';
-                }
-            }
-        ?>
-    </select>
+	<select>
+<?php
+$gemeenten = $CORE->krijgGemeenten();
+if ($gemeenten) {
+	echo '
+		<option value="0" disable>Selecteer een gemeente</option>';
+	foreach ($gemeenten as $gemeente) {
+		echo '
+		<option value="'.$gemeente["id"].'"'; if (isset($_GET["gemeente"]) && $_GET["gemeente"] == $gemeente["id"]) { echo ' selected'; } echo '>'.$gemeente["naam"].'</option>';
+	}
+}
+?>
+	</select>
 
-        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-        <script type="text/javascript">
-            google.charts.load('current', {
-                'packages': ['corechart']
-            });
-            google.charts.setOnLoadCallback(drawChart);
+<?php
 
-            function drawChart() {
+$stemResultaten = $CORE->krijgStemresulatenVanGemeenteId($_GET["gemeente"]);
 
-                var data = google.visualization.arrayToDataTable([
-                    ['Stemmen', 'Stemmen per gemeente'],
-                    ['CDA', 11],
-                    ['PVV', 2],
-                    ['VVD', 2],
-                    ['GroenLinks', 2],
-                    ['D66', 7]
-                ]);
+if ($stemResultaten) {
+	echo '	
+	<script type="text/javascript">
+		google.charts.load(\'current\', {
+			\'packages\': [\'corechart\']
+		});
+		google.charts.setOnLoadCallback(drawChart);
 
-                var options = {
-                    title: 'Stemmen per gemeente'
-                };
+		function drawChart() {
 
-                var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+			var data = google.visualization.arrayToDataTable([
+				[\'Stemmen\', \'Stemmen per gemeente\']'; 
+	
+	foreach ($stemResultaten as $resultaat) {
+		echo ',
+				[\''.$resultaat["partijNaam"].'\', '.$resultaat["stemmen"].']';
+	}
+	
+	echo '
+			]);
 
-                chart.draw(data, options);
-            }
-        </script>
-    </head>
+			var options = {
+				title: \'Stemmen per gemeente\'
+			};
 
-    <body>
-        <div id="piechart" style="width: 900px; height: 500px;"></div>
-    </body>
+			var chart = new google.visualization.PieChart(document.getElementById(\'piechart\'));
 
-    </html>
-    <?php
+			chart.draw(data, options);
+		}
+	</script>
+
+	<div id="piechart" style="width: 900px; height: 500px;"></div>';
+}
+?>
+
+<?php
 include "assets/core/foot.php";
 ?>
