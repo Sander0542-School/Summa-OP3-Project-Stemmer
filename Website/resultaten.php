@@ -55,6 +55,9 @@ if (isset($_GET["gemeente"])) {
 	</script>
 
 	<div id="piechart" style="width: 900px; height: 500px;"></div>';
+	} else {
+		echo '
+	<p>Er zijn nog geen stemmen voor deze gemeente</p>';
 	}
 }
 ?>
