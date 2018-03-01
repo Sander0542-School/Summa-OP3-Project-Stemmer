@@ -188,6 +188,7 @@ input[type=text] {
   width: 25%;
   margin-top: 21px;
   outline: 0;
+  border: 2px solid darkgray;
 }
 
 input[type=submit] {
@@ -198,7 +199,7 @@ input[type=submit] {
   border-radius: 4px;
   cursor: pointer;
   margin-top: 21px;
-  width: 27%;
+  width: calc(27% - 3px);
 }
 
 .form {
@@ -234,4 +235,31 @@ select{
   margin-left: -5%;
   margin-top: 5%;
   display: inline-block;
+}
+
+/* Parijen */
+
+.partijen {
+  width: 80%;
+  margin-left: 10%;
+  display: inline-block;
+  margin-top: 20px;
+}
+
+.partij {
+  width: 28%;
+  border: 1px solid transparent;
+  height: 200px;
+  line-height: 200px;
+  float: left;
+  margin: 2.58567%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.partij > img {
+  max-width: 90%;
+  max-height: 90%;
+  margin: auto;
+  vertical-align: middle;
+  margin-left: 5%;
 }

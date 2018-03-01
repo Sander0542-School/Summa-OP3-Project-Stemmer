@@ -79,6 +79,17 @@ class CORE
 		}
 	}
 
+	public function krijgPartijenOmOpTeStemmen() {
+		$stmt = $this->conn->prepare("SELECT partijen.id, partijen.naam, partijen.afkorting, partij_logos.url as logo FROM partijen INNER JOIN partij_logos ON partijen.logo = partij_logos.id WHERE gemeente = (SELECT gemeente FROM gebruikers WHERE id=:uID) ORDER BY naam");
+		$stmt->execute(array(":uID"=>$_SESSION["userSession"]));
+		$PS = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		if ($stmt->rowCount() == 0) {
+			return false;
+		} else {
+			return $PS;
+		}
+	}
+
 	public function heeftGestemt($gebruikerID)
 	{
 		$stmt = $this->conn->prepare("SELECT uID FROM stemmen WHERE uID=:gebruikerID;");

@@ -2,7 +2,6 @@
 $pageTitle = "Stemmen";
 include "assets/core/head.php";
 ?>
-<div class="form">
 <?php
 if (isset($_POST["loginBsn"]) && isset($_POST["loginCode"])) {
   if ($CORE->login($_POST["loginBsn"], $_POST["loginCode"])) {
@@ -14,18 +13,33 @@ if (isset($_POST["loginBsn"]) && isset($_POST["loginCode"])) {
 }
 
 if ($CORE->isIngelogd()) {
-  echo 'Halloottjesss';
+  echo '
+  <div class="partijen">
+  ';
+  
+    $partijen = $CORE->krijgPartijenOmOpTeStemmen();
+
+    foreach ($partijen as $partij) {
+      echo '
+    <div class="partij">
+      <img src="'.$partij["logo"].'" alt="'.$partij["afkorting"].'">
+    </div>';
+    }
+  
+  echo '
+  </div>';
 } else {
   echo '
+  <div class="form">
     <form action="/stemmen" method="post">
-      <input type="text" placeholder="bsn" name="loginBsn"><br>
-      <input type="text" placeholder="code" name="loginCode"><br>
+      <input type="text" placeholder="bsn" name="loginBsn" required><br>
+      <input type="text" placeholder="code" name="loginCode" required><br>
       <input type="submit" value="Login">
     </form>
+  </div>
 ';
 }
 ?>
-</div>
 <?php
 include "assets/core/foot.php";
 ?>
