@@ -216,3 +216,22 @@ select{
   outline: 0;
 }
 
+.resultaten-content {
+  width: 100%;
+  display: inline-block;
+}
+
+.resultaten-dropdown {
+  float: left;
+  margin-left: 5%;
+  margin-right: 5%;
+  width: 20%;
+}
+
+.resultaten-chart {
+  float: left;
+  width: 75%;
+  margin-left: -5%;
+  margin-top: 5%;
+  display: inline-block;
+}

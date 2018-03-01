@@ -2,21 +2,25 @@
 $pageTitle = "Resultaten";
 include "assets/core/head.php";
 ?>
-	<form>
-		<select name="gemeente" onchange="this.form.submit()">
+	<div class="resultaten-content">
+		<div class="resultaten-dropdown">
+			<form>
+				<select name="gemeente" onchange="this.form.submit()">
 <?php
 $gemeenten = $CORE->krijgGemeenten();
 if ($gemeenten) {
 	echo '
-			<option value="0"'; if (!isset($_GET["gemeente"])) { echo ' selected'; } echo ' disabled>Selecteer een gemeente</option>';
+					<option value="0"'; if (!isset($_GET["gemeente"])) { echo ' selected'; } echo ' disabled>Selecteer een gemeente</option>';
 	foreach ($gemeenten as $gemeente) {
 		echo '
-			<option value="'.$gemeente["id"].'"'; if (isset($_GET["gemeente"]) && $_GET["gemeente"] == $gemeente["id"]) { echo ' selected'; } echo '>'.$gemeente["naam"].'</option>';
+					<option value="'.$gemeente["id"].'"'; if (isset($_GET["gemeente"]) && $_GET["gemeente"] == $gemeente["id"]) { echo ' selected'; } echo '>'.$gemeente["naam"].'</option>';
 	}
 }
 	?>
-		</select>
-	</form>
+				</select>
+			</form>
+		</div>
+		<div class="resultaten-chart">
 
 <?php
 
@@ -45,7 +49,8 @@ if (isset($_GET["gemeente"])) {
 			]);
 
 			var options = {
-				title: \'Stemmen per gemeente\'
+				title: \'Stemmen per gemeente\',
+				backgroundColor: { fill:\'transparent\' }
 			};
 
 			var chart = new google.visualization.PieChart(document.getElementById(\'piechart\'));
@@ -54,13 +59,15 @@ if (isset($_GET["gemeente"])) {
 		}
 	</script>
 
-	<div id="piechart" style="width: 900px; height: 500px;"></div>';
+	<div id="piechart" style="width: 100%; height: 500px;"></div>';
 	} else {
 		echo '
-	<p>Er zijn nog geen stemmen voor deze gemeente</p>';
+			<p>Er zijn nog geen stemmen voor deze gemeente</p>';
 	}
 }
 ?>
+		</div>
+	</div>
 
 <?php
 include "assets/core/foot.php";
