@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 28 feb 2018 om 12:11
+-- Gegenereerd op: 02 mrt 2018 om 11:29
 -- Serverversie: 10.1.26-MariaDB
 -- PHP-versie: 7.1.8
 
@@ -494,6 +494,7 @@ CREATE TABLE `partijen` (
   `id` int(11) NOT NULL,
   `naam` varchar(100) NOT NULL,
   `afkorting` varchar(10) NOT NULL,
+  `logo` int(11) NOT NULL,
   `gemeente` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -501,16 +502,39 @@ CREATE TABLE `partijen` (
 -- Gegevens worden geëxporteerd voor tabel `partijen`
 --
 
-INSERT INTO `partijen` (`id`, `naam`, `afkorting`, `gemeente`) VALUES
-(2, 'Partij van de Arbeid', 'PvdA', 108),
-(3, 'Partij voor de Vrijheid', 'PVV', 299),
-(4, 'Christen-Democratisch Appèl', 'CDA', 299),
-(6, 'Partij voor de Vrijheid', 'PVV', 108),
-(7, 'Partij voor de Dieren', 'PvdD', 38),
-(8, 'GroenLinks', 'GroenLinks', 299),
-(10, 'Democraten 66', 'D66', 352),
-(11, 'Volkspartij voor Vrijheid en Democratie', 'VVD', 352),
-(12, 'DENK', 'DENK', 38);
+INSERT INTO `partijen` (`id`, `naam`, `afkorting`, `logo`, `gemeente`) VALUES
+(1, 'Partij van de Arbeid', 'PvdA', 1, 108),
+(2, 'Christen-Democratisch Appèl', 'CDA', 6, 299),
+(3, 'Partij voor de Vrijheid', 'PVV', 2, 299),
+(4, 'DENK', 'DENK', 4, 108),
+(5, 'D66', 'D66', 7, 108),
+(6, 'Partij voor de Dieren', 'PvdD', 5, 108),
+(7, 'Volkspartij voor Vrijheid en Democratie', 'VVD', 3, 108);
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `partij_logos`
+--
+
+DROP TABLE IF EXISTS `partij_logos`;
+CREATE TABLE `partij_logos` (
+  `id` int(11) NOT NULL,
+  `url` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `partij_logos`
+--
+
+INSERT INTO `partij_logos` (`id`, `url`) VALUES
+(6, '/assets/images/CDA.jpg'),
+(7, '/assets/images/D66.png'),
+(4, '/assets/images/Denk.jpg'),
+(1, '/assets/images/PvdA.jpg'),
+(5, '/assets/images/PvdD.jpg'),
+(2, '/assets/images/PVV.png'),
+(3, '/assets/images/VVD.jpg');
 
 -- --------------------------------------------------------
 
@@ -521,17 +545,9 @@ INSERT INTO `partijen` (`id`, `naam`, `afkorting`, `gemeente`) VALUES
 DROP TABLE IF EXISTS `stemmen`;
 CREATE TABLE `stemmen` (
   `uID` int(11) NOT NULL,
-  `partij` int(11) NOT NULL
+  `partij` int(11) NOT NULL,
+  `tijd` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Gegevens worden geëxporteerd voor tabel `stemmen`
---
-
-INSERT INTO `stemmen` (`uID`, `partij`) VALUES
-(1, 2),
-(2, 4),
-(4, 8);
 
 --
 -- Indexen voor geëxporteerde tabellen
@@ -563,7 +579,15 @@ ALTER TABLE `gemeenten`
 --
 ALTER TABLE `partijen`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `foreign_partijen_gemeenten` (`gemeente`);
+  ADD KEY `foreign_partijen_gemeenten` (`gemeente`),
+  ADD KEY `foreign_partijen_partijlogos` (`logo`);
+
+--
+-- Indexen voor tabel `partij_logos`
+--
+ALTER TABLE `partij_logos`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `url` (`url`);
 
 --
 -- Indexen voor tabel `stemmen`
@@ -595,7 +619,12 @@ ALTER TABLE `gemeenten`
 -- AUTO_INCREMENT voor een tabel `partijen`
 --
 ALTER TABLE `partijen`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT voor een tabel `partij_logos`
+--
+ALTER TABLE `partij_logos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- Beperkingen voor geëxporteerde tabellen
 --
@@ -616,7 +645,8 @@ ALTER TABLE `gebruikers`
 -- Beperkingen voor tabel `partijen`
 --
 ALTER TABLE `partijen`
-  ADD CONSTRAINT `foreign_partijen_gemeenten` FOREIGN KEY (`gemeente`) REFERENCES `gemeenten` (`id`);
+  ADD CONSTRAINT `foreign_partijen_gemeenten` FOREIGN KEY (`gemeente`) REFERENCES `gemeenten` (`id`),
+  ADD CONSTRAINT `foreign_partijen_partijlogos` FOREIGN KEY (`logo`) REFERENCES `partij_logos` (`id`);
 
 --
 -- Beperkingen voor tabel `stemmen`
