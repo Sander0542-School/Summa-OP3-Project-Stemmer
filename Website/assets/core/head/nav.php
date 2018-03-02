@@ -9,8 +9,8 @@
       <b class="navbar-item navbar-left"> '.$pageTitle.'</b>';
   if (isset($_SESSION["userSession"])) {
     echo '
-    <div class="navbar-split navbar-right"></div>
-    <a href="/loguit" class="navbar-item navbar-right">Uitloggen</a>';
+      <div class="navbar-split navbar-right"></div>
+      <a href="/loguit" class="navbar-item navbar-right">Uitloggen</a>';
   }
   echo '
     </nav>';
@@ -21,12 +21,12 @@
       <a href="/" class="navbar-item navbar-left">Home</a>';
   if (isset($_SESSION["userSession"])) {
     echo '
-    <div class="navbar-split navbar-right"></div>
-    <a href="/loguit" class="navbar-item navbar-right">Uitloggen</a>
-    <div class="navbar-small-split navbar-right"></div>';
+      <div class="navbar-split navbar-right"></div>
+      <a href="/loguit" class="navbar-item navbar-right">Uitloggen</a>
+      <div class="navbar-small-split navbar-right"></div>';
   } else {
     echo '
-    <div class="navbar-split navbar-right"></div>';
+      <div class="navbar-split navbar-right"></div>';
   }
   echo '
       <a href="/resultaten" class="navbar-item navbar-right">Resultaten</a>

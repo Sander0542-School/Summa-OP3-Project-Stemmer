@@ -1,6 +1,7 @@
 <?php
 session_start();
 include "classes/core.php";
+include "min.php";
 $CORE = new CORE();
 ?>
 <!DOCTYPE html>
@@ -12,7 +13,6 @@ $CORE = new CORE();
     <title><?php if (isset($pageTitle)) { echo $pageTitle; } else { echo "Pagina"; } ?> | Online Stemmen</title>
 
     <link rel="stylesheet" type="text/css" href="/assets/vendor/style.css">
-    <link rel="stylesheet" type="text/css" href="/assets/vendor/fontawesome-5.0.6/css/fontawesome-all.min.css">
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   </head>
