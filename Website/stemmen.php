@@ -25,18 +25,17 @@ if ($CORE->isIngelogd()) {
 
     foreach ($partijen as $partij) {
       echo '
-      <div class="partij">
+      <div onclick="document.getElementById(\'modal#'.$partij["id"].'\').style.display=\'block\'" class="partij">
         <span></span><img src="'.$partij["logo"].'" alt="'.$partij["afkorting"].'">
       </div>';
 
       echo '
-      <div id="myModal" class="modal">
+      <div id="modal#'.$partij["id"].'" class="modal">
         <div class="modal-header">
-          <span class="close">&times;</span>
+          <span onclick="document.getElementById(\'modal#'.$partij["id"].'\').style.display=\'none\'" class="modal-close">&times;</span>
           <h2>Stem Bevestigen</h2>
         </div>
         <div class="modal-content">
-          <span class="close">&times;</span>
           <p>Weet u zeker dat u op '.$partij["naam"].' wil stemmen?</p>
         </div>
         <div class="modal-footer">
