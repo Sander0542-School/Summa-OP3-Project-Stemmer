@@ -26,7 +26,7 @@ if ($CORE->isIngelogd()) {
     foreach ($partijen as $partij) {
       echo '
       <div class="partij">
-        <img src="'.$partij["logo"].'" alt="'.$partij["afkorting"].'">
+        <span></span><img src="'.$partij["logo"].'" alt="'.$partij["afkorting"].'">
       </div>';
     }
   

@@ -250,17 +250,17 @@ select{
   width: 28%;
   height: 200px;
   border: 1px solid transparent;
-  text-align: center;
   float: left;
   margin: 2.58567%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   cursor: pointer;
+  text-align: center;
 }
 
-.partij::before {
+.partij > span {
   display: inline-block;
-  height: 100%;
   vertical-align: middle;
+  height: 100%;
 }
 
 .partij:hover {
