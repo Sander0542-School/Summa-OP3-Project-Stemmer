@@ -28,6 +28,21 @@ if ($CORE->isIngelogd()) {
       <div class="partij">
         <span></span><img src="'.$partij["logo"].'" alt="'.$partij["afkorting"].'">
       </div>';
+
+      echo '
+      <div id="myModal" class="modal">
+        <div class="modal-header">
+          <span class="close">&times;</span>
+          <h2>Stem Bevestigen</h2>
+        </div>
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <p>Weet u zeker dat u op '.$partij["naam"].' wil stemmen?</p>
+        </div>
+        <div class="modal-footer">
+          <h3>Stem</h3>
+        </div>
+      </div>';
     }
   
   echo '
