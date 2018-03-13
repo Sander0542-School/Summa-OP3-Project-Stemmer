@@ -31,15 +31,20 @@ if ($CORE->isIngelogd()) {
 
       echo '
       <div id="modal#'.$partij["id"].'" class="modal">
-        <div class="modal-header">
-          <span onclick="document.getElementById(\'modal#'.$partij["id"].'\').style.display=\'none\'" class="modal-close">&times;</span>
-          <h2>Stem Bevestigen</h2>
-        </div>
         <div class="modal-content">
-          <p>Weet u zeker dat u op '.$partij["naam"].' wil stemmen?</p>
-        </div>
-        <div class="modal-footer">
-          <h3>Stem</h3>
+          <div class="modal-container modal-header">
+            <p onclick="document.getElementById(\'modal#'.$partij["id"].'\').style.display=\'none\'" class="modal-close">&times;</p>
+            <h2>Stem Bevestigen</h2>
+          </div>
+          <div class="modal-container modal-middle">
+            <p>Weet u zeker dat u op <strong>'.$partij["naam"].'</strong> wil stemmen?</p>
+          </div>
+          <div class="modal-container modal-footer">
+            <form method="POST">
+              <input type="hidden" value="'.$partij["id"].'" name="partij">
+              <input type="submit" value="Stem">
+            </form>
+          </div>
         </div>
       </div>';
     }
