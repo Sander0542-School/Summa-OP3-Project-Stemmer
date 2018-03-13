@@ -32,7 +32,9 @@ namespace StemResultaten
 
         private void updateComboBoxGemeenten()
         {
-            cbGemeenten.Items.Clear();
+            cbResultatenGemeenten.Items.Clear();
+            cbStatistiekenGemeenten.Items.Clear();
+            cbPartijenGemeenten.Items.Clear();
 
             DataTable dataTable = dbConnection.krijgGemeenten();
 
@@ -42,23 +44,77 @@ namespace StemResultaten
 
             dataTable.Rows.InsertAt(dataRow, 0);
 
-            cbGemeenten.ItemsSource = dataTable.DefaultView;
+            cbResultatenGemeenten.ItemsSource = dataTable.DefaultView;
+            cbStatistiekenGemeenten.ItemsSource = dataTable.DefaultView;
+            cbPartijenGemeenten.ItemsSource = dataTable.DefaultView;
 
-            cbGemeenten.SelectedIndex = 0;
+            cbResultatenGemeenten.SelectedIndex = 0;
+            cbStatistiekenGemeenten.SelectedIndex = 0;
+            cbPartijenGemeenten.SelectedIndex = 0;
         }
 
-        private void updateChart(int iGemeenteId)
+        private void updateStemResultaten(int iGemeenteId)
         {
             dgStemResultaten.ItemsSource = dbConnection.krijgStemmenPerGemeente(iGemeenteId).DefaultView;
         }
 
-        private void cbGemeenten_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void updatePartijen(int iGemeenteId)
+        {
+            dgPartijen.ItemsSource = dbConnection.krijgPartijenPerGemeente(iGemeenteId).DefaultView;
+        }
+
+        private void updateStatistieken(int iGemeenteId)
+        {
+            DataTable dataTable = dbConnection.krijgStatistiekenPerGemeente(iGemeenteId);
+
+            tbStatistiekenStemgerechtigde.Text = dataTable.Rows[0]["stemgerechtigde"].ToString();
+            tbStatistiekenGestemde.Text = dataTable.Rows[0]["gestemd"].ToString();
+            tbStatistiekenPartijen.Text = dataTable.Rows[0]["aantalPartijen"].ToString();
+            tbStatistiekenBestePartij.Text = dataTable.Rows[0]["bestePartij"].ToString();
+            tbStatistiekenParijStemmen.Text = dataTable.Rows[0]["aantalStemmen"].ToString();
+
+            try
+            {
+                int iStemgerechtigde = int.Parse(dataTable.Rows[0]["stemgerechtigde"].ToString());
+                int iGestemde = int.Parse(dataTable.Rows[0]["gestemd"].ToString());
+
+                double dOpkomst = (double)iGestemde / (double)iStemgerechtigde * 100;
+
+                tbStatistiekenOpkomst.Text = dOpkomst + "%";
+            }
+            catch (Exception)
+            {
+                tbStatistiekenOpkomst.Text = "0%";
+            }
+        }
+
+        private void cbResultatenGemeenten_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBox comboBox = (ComboBox)sender;
 
             if (comboBox.SelectedIndex != 0)
             {
-                updateChart(comboBox.SelectedIndex);
+                updateStemResultaten(comboBox.SelectedIndex);
+            }
+        }
+
+        private void cbStatistiekenGemeenten_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox comboBox = (ComboBox)sender;
+
+            if (comboBox.SelectedIndex != 0)
+            {
+                updateStatistieken(comboBox.SelectedIndex);
+            }
+        }
+
+        private void cbPartijenGemeenten_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox comboBox = (ComboBox)sender;
+
+            if (comboBox.SelectedIndex != 0)
+            {
+                updatePartijen(comboBox.SelectedIndex);
             }
         }
     }
