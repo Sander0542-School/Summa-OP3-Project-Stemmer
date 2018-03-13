@@ -40,6 +40,10 @@
   src: url("../fonts/ro-icons-1.5.eot") format("embedded-opentype"), url("../fonts/ro-icons-1.5.woff") format("opentype"), url("../fonts/ro-icons-1.5.ttf") format("truetype")
 }
 
+:root {
+  --main-bg-color: #01689b;
+}
+
 body {
   margin: 0;
   font-family: "RO Sans", Calibri, sans-serif;
@@ -52,7 +56,7 @@ body {
 }
 
 nav {
-  background-color: #01689b;
+  background-color: var(--main-bg-color);
   height: 70px;
   color: white;
   font-size: 28px;
@@ -103,7 +107,7 @@ nav a {
 /* Footer */
 
 .footer {
-  background-color: #01689b;
+  background-color: var(--main-bg-color);
   width: 100%;
   margin-top: 50px;
   color: white;
@@ -170,7 +174,7 @@ nav a {
 
 .messagebox {
   margin: 20px 15%;
-  background-color: #01689b;
+  background-color: var(--main-bg-color);
   border-radius: 8px;
 }
 
@@ -192,7 +196,7 @@ input[type=text] {
 }
 
 input[type=submit] {
-  background-color: #01689b;
+  background-color: var(--main-bg-color);
   color: white;
   padding: 12px;
   border: none;
@@ -208,7 +212,7 @@ input[type=submit] {
 
 /* Resultaten */
 
-select{
+select {
   border-radius: 4px;
   padding: 12px 20px;
   border: 2px solid darkgray;
@@ -257,7 +261,7 @@ select{
   text-align: center;
 }
 
-.partij > span {
+.partij>span {
   display: inline-block;
   vertical-align: middle;
   height: 100%;
@@ -267,7 +271,7 @@ select{
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 16px 50px 0 rgba(0, 0, 0, 0.19);
 }
 
-.partij > img {
+.partij>img {
   vertical-align: middle;
   max-width: 90%;
   max-height: 90%;
@@ -276,67 +280,123 @@ select{
 /* Modal */
 
 .modal {
+  z-index: 3;
   display: none;
-  position: fixed;
-  z-index: 100;
   padding-top: 100px;
+  position: fixed;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal-content {
-  position: relative;
-  background-color: #fefefe;
   margin: auto;
+  background-color: #fff;
+  position: relative;
   padding: 0;
-  border: 1px solid #888;
-  width: 80%;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  outline: 0;
+  width: 600px;
   -webkit-animation-name: animatetop;
   -webkit-animation-duration: 0.4s;
   animation-name: animatetop;
   animation-duration: 0.4s
 }
 
-@-webkit-keyframes animatetop {
-  from {top:-300px; opacity:0} 
-  to {top:0; opacity:1}
-}
-
-@keyframes animatetop {
-  from {top:-300px; opacity:0}
-  to {top:0; opacity:1}
-}
-
-.close {
+.modal-container {
+  padding: 0.01em 16px;
   color: white;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
 }
 
 .modal-header {
-  padding: 2px 16px;
-  background-color: #5cb85c;
-  color: white;
+  vertical-align: middle;
 }
 
-.modal-body {padding: 2px 16px;}
+.modal-header>h2 {
+  float: left;
+}
 
-.modal-footer {
-  padding: 2px 16px;
-  background-color: #5cb85c;
-  color: white;
+.modal-header>p {
+  float: right;
+  margin: 14px 8px 0 0;
+  font-size: 32px;
+  vertical-align: middle;
+}
+
+.modal-middle {
+  color: black;
+}
+
+.modal-footer input[type="submit"] {
+  float: right;
+  cursor: pointer;
+}
+
+.modal-container.modal-header {
+  background-color: var(--main-bg-color)
+}
+
+.modal-container.modal-footer {
+  background-color: var(--main-bg-color)
+}
+
+.modal-container:after,
+.modal-container:before {
+  content: "";
+  display: table;
+  clear: both
+}
+
+.modal-close {
+  cursor: pointer;
+}
+
+@-webkit-keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0
+  }
+  to {
+    top: 0;
+    opacity: 1
+  }
+}
+
+@keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0
+  }
+  to {
+    top: 0;
+    opacity: 1
+  }
+}
+
+@media (max-width:600px) {
+  .modal-content {
+    margin: 0 10px;
+    width: auto !important
+  }
+  .modal {
+    padding-top: 30px
+  }
+}
+
+@media (max-width:768px) {
+  .modal-content {
+    width: 500px
+  }
+  .modal {
+    padding-top: 50px
+  }
+}
+
+@media (min-width:993px) {
+  .modal-content {
+    width: 900px
+  }
 }
