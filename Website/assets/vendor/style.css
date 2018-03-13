@@ -400,3 +400,35 @@ select {
     width: 900px
   }
 }
+
+input[type="submit"]{
+  outline: 0;
+  margin-right: -16px;
+  display: inline-block;
+  padding: 16px 0px;
+}
+
+/* Page content */
+
+.information-content {
+  margin-top: 60px;
+  margin-left: 25%;
+  width: 45%;
+}
+
+.information-content > b {
+  line-height: 1.625;
+  font-size: 24px;
+}
+
+.information-content > .inleiding {
+  font-size: 25px;
+}
+
+.information-content > .content{
+  font-size: 18px;
+}
+
+.information-content ul{
+  list-style: square;
+}

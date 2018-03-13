@@ -103,9 +103,9 @@ class CORE
 		}
 	}
 
-	public function stemOpPartij($gebruikerID, $partijId) {
-		$stmt = $this->conn->prepare("INSERT INTO apps (name, category, uID, packageName, versionName, versionCode, permissionList, firebaseLink) VALUES (:name,:category,:uID,:packageName,:versionName,:versionCode,:appPermissions,:firebaseLink);");
-		$stmt->bindparam(":gebruikerID",$gebruikerID);
+	public function stemOpPartij($partijId) {
+		$stmt = $this->conn->prepare("INSERT INTO stemmen (uID, partij) VALUES (:gebruikerID, :partijId);");
+		$stmt->bindparam(":gebruikerID",$_SESSION["userSession"]);
 		$stmt->bindparam(":partijId",$partijId);
 		$stmt->execute();
 		return $this->lastID();

@@ -22,6 +22,7 @@ if ($CORE->isIngelogd()) {
   ';
   
     $partijen = $CORE->krijgPartijenOmOpTeStemmen();
+    $stemmen = $CORE->stemOpPartij();
 
     foreach ($partijen as $partij) {
       echo '
@@ -40,8 +41,8 @@ if ($CORE->isIngelogd()) {
             <p>Weet u zeker dat u op <strong>'.$partij["naam"].'</strong> wil stemmen?</p>
           </div>
           <div class="modal-container modal-footer">
-            <form method="POST">
-              <input type="hidden" value="'.$partij["id"].'" name="partij">
+            <form method="POST" class="modal-stem">
+              <input type="hidden" value="'.$partij["id"].'" name="partij">            
               <input type="submit" value="Stem">
             </form>
           </div>
