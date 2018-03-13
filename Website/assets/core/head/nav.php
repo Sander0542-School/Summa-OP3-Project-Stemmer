@@ -18,15 +18,12 @@
   echo '
     <nav>
       <div class="navbar-split navbar-left"></div>
-      <a href="/" class="navbar-item navbar-left">Home</a>';
+      <a href="/" class="navbar-item navbar-left">Home</a>
+      <div class="navbar-split navbar-right"></div>';
   if (isset($_SESSION["userSession"])) {
     echo '
-      <div class="navbar-split navbar-right"></div>
       <a href="/loguit" class="navbar-item navbar-right">Uitloggen</a>
       <div class="navbar-small-split navbar-right"></div>';
-  } else {
-    echo '
-      <div class="navbar-split navbar-right"></div>';
   }
   echo '
       <a href="/resultaten" class="navbar-item navbar-right">Resultaten</a>
