@@ -14,7 +14,16 @@ if (isset($_POST["loginBsn"]) && isset($_POST["loginCode"])) {
 }
 
 if ($CORE->isIngelogd()) {
-  echo '
+
+  if(isset($_POST['partij']) || $CORE->heeftGestemt($_SESSION["userSession"])) {
+    if (!$CORE->heeftGestemt($_SESSION["userSession"])) {
+      $CORE->stemOpPartij($_POST['partij']);
+      echo "<div class='messagebox'><h2>Bedankt voor het stemmen!</h2></div>";
+    } else {
+      echo "<div class='messagebox'><h2>U heeft al gestemd!</h2></div>";
+    }
+  } else {
+    echo '
 
 <!-- Partijen -->
 
@@ -22,7 +31,7 @@ if ($CORE->isIngelogd()) {
   ';
   
     $partijen = $CORE->krijgPartijenOmOpTeStemmen();
-    $stemmen = $CORE->stemOpPartij();
+    
 
     foreach ($partijen as $partij) {
       echo '
@@ -43,17 +52,19 @@ if ($CORE->isIngelogd()) {
           <div class="modal-container modal-footer">
             <form method="POST" class="modal-stem">
               <input type="hidden" value="'.$partij["id"].'" name="partij">            
-              <input type="submit" value="Stem">
+              <input type="submit" name="gestemd" value="Stem">
             </form>
           </div>
         </div>
       </div>';
     }
   
+  
   echo '
 
     </div>
 ';
+  }
 } else {
   echo '
     <div class="form">

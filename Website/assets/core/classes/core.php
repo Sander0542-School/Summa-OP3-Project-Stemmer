@@ -108,7 +108,6 @@ class CORE
 		$stmt->bindparam(":gebruikerID",$_SESSION["userSession"]);
 		$stmt->bindparam(":partijId",$partijId);
 		$stmt->execute();
-		return $this->lastID();
 	}
 
 	public function krijgPartijen() {
