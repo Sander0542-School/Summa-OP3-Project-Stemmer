@@ -6,6 +6,27 @@
         xmlns:local="clr-namespace:StemResultaten"
         mc:Ignorable="d"
         Title="Stem Resultaten" Height="600" Width="1000" ResizeMode="CanMinimize">
+    <Window.Resources>
+        <Style x:Key="RoundButtonTemplate" TargetType="Button">
+            <Setter Property="Background" Value="#01689b"/>
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="8" Padding="20,10" Background="{TemplateBinding Background}" BorderThickness="1">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#00537c"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Grid x:Name="dgStemmen">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -72,16 +93,42 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="2*"/>
-                        <RowDefinition Height="8*"/>
+                        <RowDefinition Height="9*"/>
                         <RowDefinition Height="2*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="8*"/>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="4*"/>
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
                     <ComboBox x:Name="cbPartijenGemeenten" SelectionChanged="cbPartijenGemeenten_SelectionChanged" DisplayMemberPath="naam" SelectedValuePath="id" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="0" VerticalAlignment="Center" FontSize="20" FontFamily="RO-SansWebText-Regular.ttf"/>
-                    <DataGrid x:Name="dgPartijen" IsReadOnly="True" Grid.Column="1" Grid.Row="1"/>
+                    <ComboBox x:Name="cbPartijenLijst" Visibility="Hidden" SelectionChanged="cbPartijenLijst_SelectionChanged" DisplayMemberPath="naam" SelectedValuePath="id" Grid.Column="2" HorizontalAlignment="Left" Grid.Row="0" VerticalAlignment="Center" FontSize="20" FontFamily="RO-SansWebText-Regular.ttf"/>
+                    <Grid x:Name="gPartijenInformatie" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Visibility="Hidden">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="2*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Partij Naam" FontSize="20"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Partij Afkorting" FontSize="20"/>
+                        <TextBlock Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Partij Logo" FontSize="20"/>
+
+                        <TextBox x:Name="tbPartijNaam" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" VerticalAlignment="Center" HorizontalContentAlignment="Left" FontSize="20"/>
+                        <TextBox x:Name="tbPartijAfkorting" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" VerticalAlignment="Center" HorizontalContentAlignment="Left" FontSize="20"/>
+                        <ComboBox x:Name="cbPartijenLogos" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalContentAlignment="Left"/>
+
+                        <Button x:Name="btnUpdatePartij" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Content="Opslaan" Style="{StaticResource RoundButtonTemplate}" FontSize="24" Click="btnUpdatePartij_Click"/>
+                    </Grid>
                 </Grid>
             </TabItem>
         </TabControl>

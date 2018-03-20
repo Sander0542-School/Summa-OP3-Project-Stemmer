@@ -23,6 +23,8 @@ namespace StemResultaten
     {
         private DatabaseConnection dbConnection = new DatabaseConnection();
 
+        private string sCurrentPartijId = "0";
+
         public MainWindow()
         {
             InitializeComponent();
@@ -32,10 +34,6 @@ namespace StemResultaten
 
         private void updateComboBoxGemeenten()
         {
-            cbResultatenGemeenten.Items.Clear();
-            cbStatistiekenGemeenten.Items.Clear();
-            cbPartijenGemeenten.Items.Clear();
-
             DataTable dataTable = dbConnection.krijgGemeenten();
 
             DataRow dataRow = dataTable.NewRow();
@@ -53,19 +51,34 @@ namespace StemResultaten
             cbPartijenGemeenten.SelectedIndex = 0;
         }
 
-        private void updateStemResultaten(int iGemeenteId)
+        private void updateStemResultaten(string sGemeenteId)
         {
-            dgStemResultaten.ItemsSource = dbConnection.krijgStemmenPerGemeente(iGemeenteId).DefaultView;
+            dgStemResultaten.ItemsSource = dbConnection.krijgStemmenPerGemeente(sGemeenteId).DefaultView;
         }
 
-        private void updatePartijen(int iGemeenteId)
+        private void updatePartijen(string sGemeenteId)
         {
-            dgPartijen.ItemsSource = dbConnection.krijgPartijenPerGemeente(iGemeenteId).DefaultView;
+            DataTable dataTable = dbConnection.krijgPartijenPerGemeente(sGemeenteId);
+
+            DataRow dataRow = dataTable.NewRow();
+            dataRow[0] = 0;
+            dataRow[1] = "Selecteer een Partij";
+
+            dataTable.Rows.InsertAt(dataRow, 0);
+
+            DataRow dataRow2 = dataTable.NewRow();
+            dataRow2[0] = 1000;
+            dataRow2[1] = "Nieuwe partij...";
+
+            dataTable.Rows.InsertAt(dataRow2, 1000);
+
+            cbPartijenLijst.ItemsSource = dataTable.DefaultView;
+            cbPartijenLijst.SelectedIndex = 0;
         }
 
-        private void updateStatistieken(int iGemeenteId)
+        private void updateStatistieken(string sGemeenteId)
         {
-            DataTable dataTable = dbConnection.krijgStatistiekenPerGemeente(iGemeenteId);
+            DataTable dataTable = dbConnection.krijgStatistiekenPerGemeente(sGemeenteId);
 
             tbStatistiekenStemgerechtigde.Text = dataTable.Rows[0]["stemgerechtigde"].ToString();
             tbStatistiekenGestemde.Text = dataTable.Rows[0]["gestemd"].ToString();
@@ -88,13 +101,23 @@ namespace StemResultaten
             }
         }
 
+        private void updatePartijenInfo(string sPartijId)
+        {
+            DataTable dataTable = dbConnection.krijgPartijInformatie(sPartijId);
+
+            sCurrentPartijId = dataTable.Rows[0]["id"].ToString();
+
+            tbPartijNaam.Text = dataTable.Rows[0]["naam"].ToString();
+            tbPartijAfkorting.Text = dataTable.Rows[0]["afkorting"].ToString();
+        }
+
         private void cbResultatenGemeenten_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBox comboBox = (ComboBox)sender;
 
-            if (comboBox.SelectedIndex != 0)
+            if (comboBox.SelectedValue.ToString() != "0")
             {
-                updateStemResultaten(comboBox.SelectedIndex);
+                updateStemResultaten(comboBox.SelectedValue.ToString());
             }
         }
 
@@ -102,9 +125,9 @@ namespace StemResultaten
         {
             ComboBox comboBox = (ComboBox)sender;
 
-            if (comboBox.SelectedIndex != 0)
+            if (comboBox.SelectedValue.ToString() != "0")
             {
-                updateStatistieken(comboBox.SelectedIndex);
+                updateStatistieken(comboBox.SelectedValue.ToString());
             }
         }
 
@@ -112,9 +135,70 @@ namespace StemResultaten
         {
             ComboBox comboBox = (ComboBox)sender;
 
-            if (comboBox.SelectedIndex != 0)
+            if (comboBox.SelectedValue.ToString() != "0")
             {
-                updatePartijen(comboBox.SelectedIndex);
+                updatePartijen(comboBox.SelectedValue.ToString());
+                cbPartijenLijst.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                cbPartijenLijst.Visibility = Visibility.Hidden;
+                gPartijenInformatie.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void cbPartijenLijst_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox comboBox = (ComboBox)sender;
+
+            if (comboBox.SelectedValue.ToString() == "0")
+            {
+                gPartijenInformatie.Visibility = Visibility.Hidden;
+                sCurrentPartijId = "0";
+            }
+            else
+            {
+                gPartijenInformatie.Visibility = Visibility.Visible;
+                if (comboBox.SelectedValue.ToString() != "1000")
+                {
+                    updatePartijenInfo(comboBox.SelectedValue.ToString());
+                }
+                else
+                {
+                    sCurrentPartijId = "0";
+                    tbPartijNaam.Text = "";
+                    tbPartijAfkorting.Text = "";
+                }
+            }
+        }
+
+        private void btnUpdatePartij_Click(object sender, RoutedEventArgs e)
+        {
+            if (cbPartijenLijst.SelectedValue.ToString() == "0" || sCurrentPartijId == "0")
+            {
+                //Do Nothing
+            }
+            else if (cbPartijenLijst.SelectedValue.ToString() == "1000")
+            {
+                if (dbConnection.maakPartij(tbPartijNaam.Text, tbPartijAfkorting.Text, cbPartijenLogos.SelectedValue.ToString(), cbPartijenGemeenten.SelectedValue.ToString()))
+                {
+                    MessageBox.Show("Partij aangemaakt");
+                }
+                else
+                {
+                    MessageBox.Show("De partij kon niet worden aangemaakt");
+                }
+            }
+            else
+            {
+                if (dbConnection.updatePartij(sCurrentPartijId, tbPartijNaam.Text, tbPartijAfkorting.Text, cbPartijenLogos.SelectedValue.ToString()))
+                {
+                    MessageBox.Show("Partij informatie bijgewerkt");
+                }
+                else
+                {
+                    MessageBox.Show("De partij informatie kon niet worden bijgewerkt")
+                }
             }
         }
     }
