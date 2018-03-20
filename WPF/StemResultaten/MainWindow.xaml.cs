@@ -29,6 +29,9 @@ namespace StemResultaten
         {
             InitializeComponent();
 
+            PointLabel = chartPoint =>
+                string.Format("{0} ({1:P})", chartPoint.Y, chartPoint.Participation);
+
             updateComboBoxGemeenten();
         }
 
@@ -56,7 +59,7 @@ namespace StemResultaten
             dgStemResultaten.ItemsSource = dbConnection.krijgStemmenPerGemeente(sGemeenteId).DefaultView;
         }
 
-        private void updatePartijen(string sGemeenteId)
+        private void updatePartijen(string sGemeenteId, string sPartijId = "0")
         {
             DataTable dataTable = dbConnection.krijgPartijenPerGemeente(sGemeenteId);
 
@@ -73,7 +76,22 @@ namespace StemResultaten
             dataTable.Rows.InsertAt(dataRow2, 1000);
 
             cbPartijenLijst.ItemsSource = dataTable.DefaultView;
-            cbPartijenLijst.SelectedIndex = 0;
+            cbPartijenLijst.SelectedValue = sPartijId;
+        }
+
+        private void updatePartijLogos()
+        {
+            DataTable dataTable = dbConnection.krijgPartijLogos();
+
+            DataRow dataRow = dataTable.NewRow();
+            dataRow[0] = 0;
+            dataRow[1] = "Selecteer een Logo";
+
+            dataTable.Rows.InsertAt(dataRow, 0);
+
+            cbPartijenLogos.ItemsSource = dataTable.DefaultView;
+
+            cbPartijenLogos.SelectedIndex = 0;
         }
 
         private void updateStatistieken(string sGemeenteId)
@@ -109,6 +127,7 @@ namespace StemResultaten
 
             tbPartijNaam.Text = dataTable.Rows[0]["naam"].ToString();
             tbPartijAfkorting.Text = dataTable.Rows[0]["afkorting"].ToString();
+            cbPartijenLogos.SelectedValue = dataTable.Rows[0]["logo"].ToString();
         }
 
         private void cbResultatenGemeenten_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -138,6 +157,7 @@ namespace StemResultaten
             if (comboBox.SelectedValue.ToString() != "0")
             {
                 updatePartijen(comboBox.SelectedValue.ToString());
+                cbPartijenLijst_SelectionChanged(cbPartijenLijst, null);
                 cbPartijenLijst.Visibility = Visibility.Visible;
             }
             else
@@ -151,24 +171,32 @@ namespace StemResultaten
         {
             ComboBox comboBox = (ComboBox)sender;
 
-            if (comboBox.SelectedValue.ToString() == "0")
+            try
             {
-                gPartijenInformatie.Visibility = Visibility.Hidden;
-                sCurrentPartijId = "0";
-            }
-            else
-            {
-                gPartijenInformatie.Visibility = Visibility.Visible;
-                if (comboBox.SelectedValue.ToString() != "1000")
+                if (comboBox.SelectedValue.ToString() == "0")
                 {
-                    updatePartijenInfo(comboBox.SelectedValue.ToString());
+                    gPartijenInformatie.Visibility = Visibility.Hidden;
+                    sCurrentPartijId = "0";
                 }
                 else
                 {
-                    sCurrentPartijId = "0";
-                    tbPartijNaam.Text = "";
-                    tbPartijAfkorting.Text = "";
+                    gPartijenInformatie.Visibility = Visibility.Visible;
+                    updatePartijLogos();
+                    if (comboBox.SelectedValue.ToString() != "1000")
+                    {
+                        updatePartijenInfo(comboBox.SelectedValue.ToString());
+                    }
+                    else
+                    {
+                        sCurrentPartijId = "1000";
+                        tbPartijNaam.Text = "";
+                        tbPartijAfkorting.Text = "";
+                    }
                 }
+            }
+            catch (NullReferenceException)
+            {
+                //No item in the Combobox
             }
         }
 
@@ -183,6 +211,8 @@ namespace StemResultaten
                 if (dbConnection.maakPartij(tbPartijNaam.Text, tbPartijAfkorting.Text, cbPartijenLogos.SelectedValue.ToString(), cbPartijenGemeenten.SelectedValue.ToString()))
                 {
                     MessageBox.Show("Partij aangemaakt");
+                    updatePartijen(cbPartijenGemeenten.SelectedValue.ToString());
+                    cbPartijenLijst_SelectionChanged(cbPartijenLijst, null);
                 }
                 else
                 {
@@ -194,10 +224,11 @@ namespace StemResultaten
                 if (dbConnection.updatePartij(sCurrentPartijId, tbPartijNaam.Text, tbPartijAfkorting.Text, cbPartijenLogos.SelectedValue.ToString()))
                 {
                     MessageBox.Show("Partij informatie bijgewerkt");
+                    updatePartijen(cbPartijenGemeenten.SelectedValue.ToString(), cbPartijenLijst.SelectedValue.ToString());
                 }
                 else
                 {
-                    MessageBox.Show("De partij informatie kon niet worden bijgewerkt")
+                    MessageBox.Show("De partij informatie kon niet worden bijgewerkt");
                 }
             }
         }

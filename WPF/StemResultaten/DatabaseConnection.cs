@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace StemResultaten
 {
@@ -89,8 +90,25 @@ namespace StemResultaten
             connection.Open();
 
             MySqlCommand sqlCommand = connection.CreateCommand();
-            sqlCommand.CommandText = "SELECT id, naam, afkorting FROM partijen WHERE id = @partijId";
+            sqlCommand.CommandText = "SELECT id, naam, afkorting, logo FROM partijen WHERE id = @partijId";
             sqlCommand.Parameters.AddWithValue("@partijId", sPartijId);
+
+            MySqlDataReader dataReader = sqlCommand.ExecuteReader();
+
+            DataTable dataTable = new DataTable();
+            dataTable.Load(dataReader);
+
+            connection.Close();
+
+            return dataTable;
+        }
+
+        public DataTable krijgPartijLogos()
+        {
+            connection.Open();
+
+            MySqlCommand sqlCommand = connection.CreateCommand();
+            sqlCommand.CommandText = "SELECT id, url FROM partij_logos ORDER BY url";
 
             MySqlDataReader dataReader = sqlCommand.ExecuteReader();
 
@@ -109,7 +127,7 @@ namespace StemResultaten
                 connection.Open();
 
                 MySqlCommand sqlCommand = connection.CreateCommand();
-                sqlCommand.CommandText = "INSER INTO partijen (naam, afkorting, logo, gemeente) VALUES (@partijNaam, @partijAfkorting, @partijLogo, @partijGemeenten)";
+                sqlCommand.CommandText = "INSERT INTO partijen (naam, afkorting, logo, gemeente) VALUES (@partijNaam, @partijAfkorting, @partijLogo, @partijGemeenten)";
                 sqlCommand.Parameters.AddWithValue("@partijNaam", sNaam);
                 sqlCommand.Parameters.AddWithValue("@partijAfkorting", sAfkoring);
                 sqlCommand.Parameters.AddWithValue("@partijGemeenten", sGemeente);
@@ -121,8 +139,9 @@ namespace StemResultaten
 
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
+                connection.Close();
                 return false;
             }
         }
@@ -134,7 +153,7 @@ namespace StemResultaten
                 connection.Open();
 
                 MySqlCommand sqlCommand = connection.CreateCommand();
-                sqlCommand.CommandText = "UPDATE partijen SET naam = @partijNaam, afkorting = @partijAfkorting, logo = @partijLogo WHERE id = @partijId)";
+                sqlCommand.CommandText = "UPDATE partijen SET naam = @partijNaam, afkorting = @partijAfkorting, logo = @partijLogo WHERE id = @partijId";
                 sqlCommand.Parameters.AddWithValue("@partijId", sId);
                 sqlCommand.Parameters.AddWithValue("@partijNaam", sNaam);
                 sqlCommand.Parameters.AddWithValue("@partijAfkorting", sAfkorting);
@@ -146,8 +165,9 @@ namespace StemResultaten
 
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
+                connection.Close();
                 return false;
             }
         }
