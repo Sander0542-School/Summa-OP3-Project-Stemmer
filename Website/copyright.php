@@ -18,7 +18,7 @@ include "assets/core/head.php";
         <br>
         <div class="content">
             <p>Bij hergebruik van de inhoud van deze website is naamsvermelding niet verplicht. Maar bij het citeren van de inhoud mag niet
-            de indruk worden gewekt dat de Rijksoverheid zonder meer de strekking van het afgeleide werk onderschrijft.</p><br>
+            de indruk worden gewekt dat de Onlinestemmen zonder meer de strekking van het afgeleide werk onderschrijft.</p><br>
         </div>
         <b>Rechten die ongewijzigd blijven</b>
         <br>

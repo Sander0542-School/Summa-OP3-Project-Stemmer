@@ -5,20 +5,20 @@ include "assets/core/head.php";
     <div class="information-content">
         <h1>Privacy</h1>
         <div class="inleiding">
-            <p>Persoonsgegevens die u op deze website opgeeft, gebruikt de Rijksoverheid alleen voor het doel waarvoor u ze
+            <p>Persoonsgegevens die u op deze website opgeeft, gebruikt de Onlinestemmen alleen voor het doel waarvoor u ze
                 heeft gegeven.</p>
             <br>
         </div>
 
-        <b>Hoe gaat de Rijksoverheid om met uw persoonsgegevens?</b>
+        <b>Hoe gaat de Onlinestemmen om met uw persoonsgegevens?</b>
         <br>
         <br>
         <div class="content">
             <p>Wilt u een brochure aanvragen? Of een nieuwsbrief ontvangen? Dan hebben wij uw persoonsgegevens, zoals uw naam,
-                e-mailadres of woonadres nodig. Bij het aanvraagformulier staat vermeld welke gegevens de Rijksoverheid gebruikt
+                e-mailadres of woonadres nodig. Bij het aanvraagformulier staat vermeld welke gegevens de Onlinestemmen gebruikt
                 en waarvoor.</p>
-            <br> De Rijksoverheid gebruikt uw persoonsgegevens alleen voor het doel waarvoor u ze heeft achtergelaten. Heeft
-            u bijvoorbeeld uw naam en adres ingevuld om een brochure te ontvangen? Dan gebruikt de Rijksoverheid uw gegevens
+            <br> De Onlinestemmen gebruikt uw persoonsgegevens alleen voor het doel waarvoor u ze heeft achtergelaten. Heeft
+            u bijvoorbeeld uw naam en adres ingevuld om een brochure te ontvangen? Dan gebruikt de Onlinestemmen uw gegevens
             alleen om u die brochure toe te sturen en dus niet voor het toesturen van andere brochures.</p>
             <br>
         </div>
@@ -26,7 +26,7 @@ include "assets/core/head.php";
         <br>
         <br>
         <div class="content">
-            <p>De Rijksoverheid kan gegevens wel gebruiken voor opsporing. Bijvoorbeeld als iemand via de site strafbare feiten
+            <p>De Onlinestemmen kan gegevens wel gebruiken voor opsporing. Bijvoorbeeld als iemand via de site strafbare feiten
                 pleegt of strafbare uitlatingen doet.</p>
             <br>
         </div>
@@ -34,7 +34,7 @@ include "assets/core/head.php";
         <br>
         <br>
         <div class="content">
-            <p>De Rijksoverheid bewaart persoonsgegevens niet langer dan nodig is voor het doel waarvoor u ze heeft achtergelaten.
+            <p>De Onlinestemmen bewaart persoonsgegevens niet langer dan nodig is voor het doel waarvoor u ze heeft achtergelaten.
                 Daarna worden de gegevens vernietigd.</p>
             <br>
         </div>
@@ -42,12 +42,12 @@ include "assets/core/head.php";
         <br>
         <br>
         <div class="content">
-            <p>De Rijksoverheid gebruikt uw persoonsgegevens alleen voor het doel waarvoor u ze heeft achtergelaten. Voor onze
+            <p>De Onlinestemmen gebruikt uw persoonsgegevens alleen voor het doel waarvoor u ze heeft achtergelaten. Voor onze
                 dienstverlening via social media maken wij echter gebruik van externe platforms, zoals Twitter en WhatsApp.
                 Wij vinden het belangrijk om te melden dat wij geen invloed hebben op de wijze waarop deze platforms omgaan
                 met uw persoonsgegevens. Wij adviseren u dan ook geen privacygevoelige gegevens te delen via deze platforms.
-                Voor onze dienstverlening zijn deze gegevens ook niet noodzakelijk. Informatie Rijksoverheid heeft geen toegang
-                tot de Basisregistratie personen (BRP) en andere overheidssystemen. Daarom kan Informatie Rijksoverheid geen
+                Voor onze dienstverlening zijn deze gegevens ook niet noodzakelijk. Informatie Onlinestemmen heeft geen toegang
+                tot de Basisregistratie personen (BRP) en andere overheidssystemen. Daarom kan Informatie Onlinestemmen geen
                 informatie opzoeken op basis van uw persoonsgegevens.</p>
             <br>
         </div>
