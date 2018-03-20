@@ -208,7 +208,7 @@ input[type=submit] {
   margin-top: 21px;
   width: calc(27% - 3px);
   font-size: 20px;
-  margin-top: 0;
+  
 }
 
 .form {
@@ -338,6 +338,7 @@ select {
 .modal-footer input[type="submit"] {
   float: right;
   cursor: pointer;
+  margin: 0;
 }
 
 .modal-container.modal-header {
@@ -408,7 +409,6 @@ select {
 
 input[type="submit"]{
   outline: 0;
-  margin-right: -16px;
   display: inline-block;
   padding: 16px 0px;
 }
@@ -436,4 +436,31 @@ input[type="submit"]{
 
 .information-content ul{
   list-style: square;
+}
+
+/* Sitemap */
+
+.sitemap{
+  margin-top: 85px;
+  margin-left: 32%;
+  font-size: 30px;
+  color: #01689b;
+}
+
+.sitemap-link > a{
+  text-decoration: none;
+  color: #01689b;
+}
+
+.sitemap-link > a:hover {
+  color: #154273;
+  text-decoration: underline;
+}
+
+.ro-icons{
+  font-family: "RO Icons";
+  font-size: 15px;
+  text-decoration: none;
+  margin-left: 32%;
+  color: #01689b;
 }

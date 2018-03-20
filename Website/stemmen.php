@@ -52,7 +52,7 @@ if ($CORE->isIngelogd()) {
           <div class="modal-container modal-footer">
             <form method="POST" class="modal-stem">
               <input type="hidden" value="'.$partij["id"].'" name="partij">            
-              <input type="submit" name="gestemd" value="Stem">
+              <input type="submit" value="Stem">
             </form>
           </div>
         </div>
