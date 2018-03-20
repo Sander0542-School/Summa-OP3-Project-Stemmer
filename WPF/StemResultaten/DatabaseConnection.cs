@@ -71,7 +71,7 @@ namespace StemResultaten
             connection.Open();
 
             MySqlCommand sqlCommand = connection.CreateCommand();
-            sqlCommand.CommandText = "SELECT naam as partijNaam FROM partijen WHERE gemeente = @gemeenteId ORDER BY naam";
+            sqlCommand.CommandText = "SELECT id, naam FROM partijen WHERE gemeente = @gemeenteId ORDER BY naam";
             sqlCommand.Parameters.AddWithValue("@gemeenteId", iGemeenteId);
 
             MySqlDataReader dataReader = sqlCommand.ExecuteReader();
