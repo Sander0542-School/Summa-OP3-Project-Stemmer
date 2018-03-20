@@ -44,9 +44,12 @@
   --main-bg-color: #01689b;
 }
 
+* {
+  font-family: "RO Sans", Calibri, sans-serif;
+}
+
 body {
   margin: 0;
-  font-family: "RO Sans", Calibri, sans-serif;
 }
 
 /* Navbar */
