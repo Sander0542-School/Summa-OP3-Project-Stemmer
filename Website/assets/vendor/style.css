@@ -207,6 +207,8 @@ input[type=submit] {
   cursor: pointer;
   margin-top: 21px;
   width: calc(27% - 3px);
+  font-size: 20px;
+  margin-top: 0;
 }
 
 .form {
