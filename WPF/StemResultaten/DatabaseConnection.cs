@@ -54,7 +54,7 @@ namespace StemResultaten
             connection.Open();
 
             MySqlCommand sqlCommand = connection.CreateCommand();
-            sqlCommand.CommandText = "SELECT (SELECT COUNT(id) FROM gebruikers WHERE gemeente = @gemeenteId) as stemgerechtigde, (SELECT COUNT(uID) FROM stemmen INNER JOIN gebruikers ON stemmen.uID = gebruikers.id WHERE gebruikers.gemeente = @gemeenteId) as gestemd, (SELECT COUNT(partijen.id) FROM partijen WHERE gemeente = @gemeenteId) as aantalPartijen, (SELECT partijen.naam FROM stemmen INNER JOIN partijen ON stemmen.partij = partijen.id WHERE partijen.gemeente = @gemeenteId LIMIT 1) as bestePartij, (SELECT COUNT(stemmen.uID) FROM stemmen INNER JOIN partijen ON stemmen.partij = partijen.id WHERE partijen.gemeente = @gemeenteId LIMIT 1) as aantalStemmen";
+            sqlCommand.CommandText = "SELECT (SELECT COUNT(id) FROM gebruikers WHERE gemeente = @gemeenteId) as stemgerechtigde, (SELECT COUNT(uID) FROM stemmen INNER JOIN gebruikers ON stemmen.uID = gebruikers.id WHERE gebruikers.gemeente = @gemeenteId) as gestemd, (SELECT COUNT(partijen.id) FROM partijen WHERE gemeente = @gemeenteId) as aantalPartijen";
             sqlCommand.Parameters.AddWithValue("@gemeenteId", sGemeenteId);
 
             MySqlDataReader dataReader = sqlCommand.ExecuteReader();

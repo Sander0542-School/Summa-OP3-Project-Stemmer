@@ -60,12 +60,14 @@
             <TabItem Header="Statistieken" FontFamily="RO-SansWebText-Regular.ttf">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="3*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="3*"/>
@@ -75,19 +77,13 @@
                         <ColumnDefinition Width="3*"/>
                     </Grid.ColumnDefinitions>
                     <ComboBox x:Name="cbStatistiekenGemeenten" SelectionChanged="cbStatistiekenGemeenten_SelectionChanged" DisplayMemberPath="naam" SelectedValuePath="id" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Left" Grid.Row="0" VerticalAlignment="Center" FontSize="20" FontFamily="RO-SansWebText-Regular.ttf"/>
-                    <TextBlock Grid.Column="1" Grid.Row="1" Text="Stemgerechtigde Inwoners" FontSize="24px" TextWrapping="Wrap" VerticalAlignment="Bottom" TextAlignment="Center" FontFamily="RO-SansWebText-Regular.ttf"/>
-                    <TextBlock Grid.Column="2" Grid.Row="1" Text="Gestemde Inwoners" FontSize="24px" TextWrapping="Wrap" VerticalAlignment="Bottom" TextAlignment="Center" FontFamily="RO-SansWebText-Regular.ttf"/>
-                    <TextBlock Grid.Column="3" Grid.Row="1" Text="Opkomst Percentage" FontSize="24px" TextWrapping="Wrap" VerticalAlignment="Bottom" TextAlignment="Center" FontFamily="RO-SansWebText-Regular.ttf"/>
-                    <TextBlock Grid.Column="1" Grid.Row="3" Text="Aantal Partijen" FontSize="24px" TextWrapping="Wrap" VerticalAlignment="Bottom" TextAlignment="Center" FontFamily="RO-SansWebText-Regular.ttf"/>
-                    <TextBlock Grid.Column="2" Grid.Row="3" Text="Winnende Partij" FontSize="24px" TextWrapping="Wrap" VerticalAlignment="Bottom" TextAlignment="Center" FontFamily="RO-SansWebText-Regular.ttf"/>
-                    <TextBlock Grid.Column="3" Grid.Row="3" Text="Aantal Stemmen" FontSize="24px" TextWrapping="Wrap" VerticalAlignment="Bottom" TextAlignment="Center" FontFamily="RO-SansWebText-Regular.ttf"/>
-
-                    <TextBlock x:Name="tbStatistiekenStemgerechtigde" Grid.Column="1" Grid.Row="2" Text="0" FontSize="24px" FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" FontFamily="RO-SansWebText-Regular.ttf"/>
-                    <TextBlock x:Name="tbStatistiekenGestemde" Grid.Column="2" Grid.Row="2" Text="0" FontSize="24px" FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" FontFamily="RO-SansWebText-Regular.ttf"/>
-                    <TextBlock x:Name="tbStatistiekenOpkomst" Grid.Column="3" Grid.Row="2" Text="0" FontSize="24px" FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" FontFamily="RO-SansWebText-Regular.ttf"/>
-                    <TextBlock x:Name="tbStatistiekenPartijen" Grid.Column="1" Grid.Row="4" Text="0" FontSize="24px" FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" FontFamily="RO-SansWebText-Regular.ttf"/>
-                    <TextBlock x:Name="tbStatistiekenBestePartij" Grid.Column="2" Grid.Row="4" Text="0" FontSize="24px" FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" FontFamily="RO-SansWebText-Regular.ttf"/>
-                    <TextBlock x:Name="tbStatistiekenParijStemmen" Grid.Column="3" Grid.Row="4" Text="0" FontSize="24px" FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" FontFamily="RO-SansWebText-Regular.ttf"/>
+                    <TextBlock Grid.Column="1" Grid.Row="1" Text="Gestemd" FontSize="24px" TextWrapping="Wrap" VerticalAlignment="Bottom" TextAlignment="Center" FontFamily="RO-SansWebText-Regular.ttf"/>
+                    <TextBlock Grid.Column="1" Grid.Row="3" Text="Niet Gestemd" FontSize="24px" TextWrapping="Wrap" VerticalAlignment="Bottom" TextAlignment="Center" FontFamily="RO-SansWebText-Regular.ttf"/>
+                    <TextBlock Grid.Column="1" Grid.Row="5" Text="Aantal Partijen" FontSize="24px" TextWrapping="Wrap" VerticalAlignment="Bottom" TextAlignment="Center" FontFamily="RO-SansWebText-Regular.ttf"/>
+                    <TextBlock x:Name="tbStatistiekenGestemd" Grid.Column="1" Grid.Row="2" Text="0" FontSize="24px" FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" FontFamily="RO-SansWebText-Regular.ttf"/>
+                    <TextBlock x:Name="tbStatistiekenNietGestemd" Grid.Column="1" Grid.Row="4" Text="0" FontSize="24px" FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" FontFamily="RO-SansWebText-Regular.ttf"/>
+                    <TextBlock x:Name="tbStatistiekenPartijen" Grid.Column="1" Grid.Row="6" Text="0" FontSize="24px" FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" FontFamily="RO-SansWebText-Regular.ttf"/>
+                    <lvc:PieChart x:Name="pcStatastieken" Grid.Row="1" Grid.RowSpan="6" Grid.Column="2" Grid.ColumnSpan="2" LegendLocation="Right" Hoverable="False" DataTooltip="{x:Null}"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Partijen" FontFamily="RO-SansWebText-Regular.ttf">

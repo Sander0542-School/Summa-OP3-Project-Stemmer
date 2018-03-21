@@ -60,8 +60,8 @@ namespace StemResultaten
 
         private void updateStemResultaten(string sGemeenteId)
         {
-            DataTable dataTable = dbConnection.krijgStemmenPerGemeente(sGemeenteId);
             pcStemmen.Series.Clear();
+            DataTable dataTable = dbConnection.krijgStemmenPerGemeente(sGemeenteId);
             foreach (DataRow row in dataTable.Rows)
             {
                 addGemeentenToChart(row["partijNaam"].ToString(), int.Parse(row["stemmen"].ToString()));
@@ -106,25 +106,26 @@ namespace StemResultaten
         private void updateStatistieken(string sGemeenteId)
         {
             DataTable dataTable = dbConnection.krijgStatistiekenPerGemeente(sGemeenteId);
-
-            tbStatistiekenStemgerechtigde.Text = dataTable.Rows[0]["stemgerechtigde"].ToString();
-            tbStatistiekenGestemde.Text = dataTable.Rows[0]["gestemd"].ToString();
+            
             tbStatistiekenPartijen.Text = dataTable.Rows[0]["aantalPartijen"].ToString();
-            tbStatistiekenBestePartij.Text = dataTable.Rows[0]["bestePartij"].ToString();
-            tbStatistiekenParijStemmen.Text = dataTable.Rows[0]["aantalStemmen"].ToString();
+            tbStatistiekenGestemd.Text = dataTable.Rows[0]["gestemd"].ToString();
 
             try
             {
                 int iStemgerechtigde = int.Parse(dataTable.Rows[0]["stemgerechtigde"].ToString());
                 int iGestemde = int.Parse(dataTable.Rows[0]["gestemd"].ToString());
+                int iNietGestemde = iStemgerechtigde - iGestemde;
 
-                double dOpkomst = (double)iGestemde / (double)iStemgerechtigde * 100;
+                tbStatistiekenNietGestemd.Text = iNietGestemde.ToString();
 
-                tbStatistiekenOpkomst.Text = dOpkomst + "%";
+                pcStatastieken.Series.Clear();
+
+                addOpkomstToChart("Gestemt", iGestemde);
+                addOpkomstToChart("Niet Gestemt", iNietGestemde);
             }
             catch (Exception)
             {
-                tbStatistiekenOpkomst.Text = "0%";
+                pcStatastieken.Series.Clear();
             }
         }
 
@@ -146,6 +147,10 @@ namespace StemResultaten
             if (comboBox.SelectedValue.ToString() != "0")
             {
                 updateStemResultaten(comboBox.SelectedValue.ToString());
+            }
+            else
+            {
+                pcStemmen.Series.Clear();
             }
         }
 
@@ -250,6 +255,17 @@ namespace StemResultaten
                 Values = new ChartValues<ObservableValue> { new ObservableValue(iValue) },
                 DataLabels = true,
                 LabelPoint = chartPoint => string.Format("{0} ({1})", chartPoint.SeriesView.Title, chartPoint.Y)
+            });
+        }
+
+        private void addOpkomstToChart(string sTitle, int iValue)
+        {
+            pcStatastieken.Series.Add(new PieSeries
+            {
+                Title = sTitle,
+                Values = new ChartValues<ObservableValue> { new ObservableValue(iValue) },
+                DataLabels = true,
+                LabelPoint = chartPoint => string.Format("{0} ({1:P})", chartPoint.SeriesView.Title, chartPoint.Participation)
             });
         }
     }
