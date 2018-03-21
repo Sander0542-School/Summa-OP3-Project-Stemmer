@@ -122,6 +122,11 @@ namespace StemResultaten
 
                 addOpkomstToChart("Gestemt", iGestemde);
                 addOpkomstToChart("Niet Gestemt", iNietGestemde);
+
+                if (iGestemde == 0 && iNietGestemde == 0)
+                {
+                    pcStatastieken.Series.Clear();
+                }
             }
             catch (Exception)
             {
