@@ -1,4 +1,8 @@
-﻿using System;
+﻿using LiveCharts;
+using LiveCharts.Defaults;
+using LiveCharts.Wpf;
+
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -23,14 +27,14 @@ namespace StemResultaten
     {
         private DatabaseConnection dbConnection = new DatabaseConnection();
 
+        private Random random = new Random();
+
         private string sCurrentPartijId = "0";
 
         public MainWindow()
         {
             InitializeComponent();
-
-            PointLabel = chartPoint =>
-                string.Format("{0} ({1:P})", chartPoint.Y, chartPoint.Participation);
+            DataContext = this;
 
             updateComboBoxGemeenten();
         }
@@ -56,7 +60,12 @@ namespace StemResultaten
 
         private void updateStemResultaten(string sGemeenteId)
         {
-            dgStemResultaten.ItemsSource = dbConnection.krijgStemmenPerGemeente(sGemeenteId).DefaultView;
+            DataTable dataTable = dbConnection.krijgStemmenPerGemeente(sGemeenteId);
+            pcStemmen.Series.Clear();
+            foreach (DataRow row in dataTable.Rows)
+            {
+                addGemeentenToChart(row["partijNaam"].ToString(), int.Parse(row["stemmen"].ToString()));
+            }
         }
 
         private void updatePartijen(string sGemeenteId, string sPartijId = "0")
@@ -231,6 +240,17 @@ namespace StemResultaten
                     MessageBox.Show("De partij informatie kon niet worden bijgewerkt");
                 }
             }
+        }
+
+        private void addGemeentenToChart(string sTitle, int iValue)
+        {
+            pcStemmen.Series.Add(new PieSeries
+            {
+                Title = sTitle,
+                Values = new ChartValues<ObservableValue> { new ObservableValue(iValue) },
+                DataLabels = true,
+                LabelPoint = chartPoint => string.Format("{0} ({1})", chartPoint.SeriesView.Title, chartPoint.Y)
+            });
         }
     }
 }
