@@ -17,7 +17,7 @@ include "assets/core/head.php";
         <br>
         <br>
         <div class="content">
-            Onlinestemmen.nl gebruikt cookies voor webstatistieken en onderzoek.</p>
+            <p>Onlinestemmen.nl gebruikt cookies voor webstatistieken en onderzoek.</p>
             <br>
         </div>
         <b>Trackingcookies</b>
